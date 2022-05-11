@@ -16,6 +16,7 @@ export default function App(){
                     <Route path='/' element={<Login/>}/>
                     <Route path='/cadastro' element={<Register/>}/>
                     <Route path='/home' element={<Home/>}/>
+                    {/* <Route path='/cart' element={<Cart/>}/> */}
                 </Routes>
             </BrowserRouter>
         </usuarioINFO.Provider>
