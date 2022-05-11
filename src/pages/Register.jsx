@@ -21,11 +21,12 @@ export default function Register(){
             setRegisterINFO({...registerINFO, password:'', confirmPassword: ''})
             return
         }
-        const URL = 'https://project-wpstore.herokuapp.com/singup'
+        const URL = 'https://project-wpstore.herokuapp.com/signup'
         const promise = axios.post(URL, {...registerINFO})
         promise.then( (res) => {console.log(res.datamac)
                                 navigate('/')} )
-        promise.catch( (err) => {alert('Email Já Registrado: ', err)} )
+        promise.catch( (err) => {alert('Email Já Registrado: ')
+                                console.log(err)} )
     }
 
     return(

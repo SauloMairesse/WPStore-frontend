@@ -14,7 +14,7 @@ export default function Login(){
 
     function login(event){
         event.preventDefault();
-        const URL = 'https://project-wpstore.herokuapp.com/sing-in'
+        const URL = 'https://project-wpstore.herokuapp.com/signin'
         const promise = axios.post(URL, {...loginINFO})
         promise.then( (res) => {setUserINFO(res.data)
                                 navigate('/home')})
