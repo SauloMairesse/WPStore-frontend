@@ -17,6 +17,7 @@ export default function Items(){
     //     promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   }   ,[])
 
     function Item(props){
+        if(props.quantidade !== 0){
         return(
             <ItemHTML>
                 <ItemIMG src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/
@@ -26,8 +27,8 @@ export default function Items(){
                 <NameITEM>Sou um Item</NameITEM>
                 <ValueITEM> R$ 200.00</ValueITEM>
                 <Buy>BUY NOW</Buy>
-            </ItemHTML>
-        )
+            </ItemHTML>)
+        }
     }
 
     if(listItems.length === 0){

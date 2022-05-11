@@ -8,17 +8,15 @@ export default function Login(){
 
     const {userINFO, setUserINFO} = React.useContext(usuarioINFO)
 
-    const [loginINFO, setLoginINFO] = React.useState({email: '',
-                                                    password: ''})
+    const [loginINFO, setLoginINFO] = React.useState({  email: '',
+                                                        password: ''})
     const navigate = useNavigate()
 
     function login(event){
         event.preventDefault();
-        const URL = 'http://localhost:5000/sing-in'
+        const URL = 'https://project-wpstore.herokuapp.com/sing-in'
         const promise = axios.post(URL, {...loginINFO})
-        promise.then( (res) => {console.log('to aqui ?')
-                                setUserINFO(res.data)
-                                console.log(res.data)
+        promise.then( (res) => {setUserINFO(res.data)
                                 navigate('/home')})
         promise.catch( () => {alert('Usuario inexistente ou Senha errada')} )
     }
@@ -37,7 +35,7 @@ export default function Login(){
                             onChange={ (e) => setLoginINFO({...loginINFO, password: e.target.value}) }/>
                     <button type="submit">Entrar</button>     
             </FormLogin>
-            <Link to={`/cadastro`}> <SpanLogin> Primeira vez? Cadastre-se! </SpanLogin> </Link>
+            <Link to={`/register`}> <SpanLogin> Primeira vez? Cadastre-se! </SpanLogin> </Link>
         </LoginHTML>
         )
 }
