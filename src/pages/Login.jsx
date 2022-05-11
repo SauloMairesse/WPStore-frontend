@@ -14,7 +14,7 @@ export default function Login(){
 
     function login(event){
         event.preventDefault();
-        const URL = 'https://project-wpstore.herokuapp.com/signin'
+        const URL = 'https://project-wpstore.herokuapp.com/'
         const promise = axios.post(URL, {...loginINFO})
         promise.then( (res) => {setUserINFO(res.data)
                                 navigate('/home')})
@@ -24,7 +24,7 @@ export default function Login(){
     return (
         <LoginHTML>
             <StoreName>WPStore</StoreName>
-            <FormLogin>
+            <FormLogin onSubmit={login}>
                     <input  type='email' required
                             placeholder={'  Email'}
                             value={loginINFO.email}
