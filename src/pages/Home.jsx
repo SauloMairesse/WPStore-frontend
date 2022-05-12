@@ -5,27 +5,27 @@ import usuarioINFO from "../context/userINFO"
 import axios from "axios"
 import Items from "../components/Items"
 
-export default function Home(){
+export default function Home() {
 
-    const {userINFO, setUserINFO} = React.useContext(usuarioINFO)
+    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
 
     const navigate = useNavigate()
 
     return (
-       <HomeHTML>
+        <HomeHTML>
             <HomeHEADER>
                 <UserPHOTO>SD</UserPHOTO>
                 <h2>All PRODUCTS</h2>
-                <ion-icon   name="bag-outline" 
-                            size='large' 
-                            onClick={() =>  navigate('/cart')} />
+                <ion-icon name="bag-outline"
+                    size='large'
+                    onClick={() => navigate('/cart')} />
             </HomeHEADER>
-            <Items/>
+            <Items />
             <HomeFOOTER>
                 <h6>aqui e Footer</h6>
-           </HomeFOOTER>
-       </HomeHTML>
-        )
+            </HomeFOOTER>
+        </HomeHTML>
+    )
 }
 
 const UserPHOTO = styled.div`

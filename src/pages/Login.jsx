@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import usuarioINFO from "../context/userINFO"
 import axios from "axios"
 
+import logo from "../assets/Logo.png"
+
 export default function Login(){
 
     const {userINFO, setUserINFO} = React.useContext(usuarioINFO)
@@ -23,19 +25,19 @@ export default function Login(){
 
     return (
         <LoginHTML>
-            <StoreName>WPStore</StoreName>
+            <Logo src={logo} />
             <FormLogin onSubmit={login}>
                     <input  type='email' required
-                            placeholder={'  Email'}
+                            placeholder={'EMAIL'}
                             value={loginINFO.email}
                             onChange={ (e) => setLoginINFO({...loginINFO, email: e.target.value}) }/>
                     <input  type="password" required
-                            placeholder={'  Senha'}
+                            placeholder={'SENHA'}
                             value={loginINFO.password}
                             onChange={ (e) => setLoginINFO({...loginINFO, password: e.target.value}) }/>
-                    <button type="submit">Entrar</button>     
+                    <button type="submit">ENTRAR</button>     
             </FormLogin>
-            <Link to={`/register`}> <SpanLogin> Primeira vez? Cadastre-se! </SpanLogin> </Link>
+            <Link to={`/register`} style={{ textDecoration: 'none' }}><SpanLogin>Primeira vez? Cadastre-se!</SpanLogin></Link>
         </LoginHTML>
         )
 }
@@ -47,54 +49,67 @@ const LoginHTML = styled.main`
         justify-content: center;
         width: 100vw;
         height: 100vh;
-        background-color: #EFEFEF;
+        background-color: #F0F4F7;
     `
-const StoreName = styled.h1`
-        font-family: 'Alfa Slab One', cursive;
-        font-size: 30px;
-        font-weight: 700;
-        line-height: 30px;
-        letter-spacing: 0em;
-        color: #205375;
+const Logo = styled.img`
+        width: 210px;
+        height: 126px;
     `
 const FormLogin = styled.form`
+    width: 265px;
+    height: 141px;
     display: flex;
     flex-direction: column;
-    margin: 20px 0 40px 0;
-    padding: 40px 20px 40px 20px;
-    border-radius: 10px;
-    background-color: #F66B0E;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 12px;
     input{
-        height: 58px;
-        width: 326px;
-        left: 25px;
-        top: 233px;
-        border-radius: 5px;
+        height: 41px;
+        width: 265px;
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
         border: none;
-        margin-bottom: 15px;
+        padding-left: 15px;
+        font-family: 'Roboto';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 10px;
+        color: #1a1a1a;
+
+        ::placeholder {
+            font-family: 'Roboto';
+            font-size: 10px;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 10px;
+            color: #1a1a1a;
+        }
     }
     button{
-        height: 46px;
-        width: 326px;
-        left: 23px;
-        top: 375px;
-        border-radius: 5px;
-        background-color: #205375;
-        font-family: 'Alfa Slab One', cursive;
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 23px;
-        letter-spacing: 0em;
-        color: #fff;
+        height: 41px;
+        width: 265px;
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: none;
+        background-color: #000000;
+        font-family: 'Roboto';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 10px;
+        color: #FFFFFF;
     }
 `
 const SpanLogin = styled.span`
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 30px;
-    letter-spacing: 0em;
-    text-decoration: none;
-    color: #112B3C;
+        font-family: 'Roboto';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 10px;
+        color: #1a1a1a;
 `
-    

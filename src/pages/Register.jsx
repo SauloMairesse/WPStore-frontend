@@ -5,6 +5,9 @@ import usuarioINFO from "../context/userINFO"
 import axios from "axios"
 import Items from "../components/Items"
 
+import logo from "../assets/Logo.png"
+
+
 export default function Register(){
     const navigate = useNavigate()
     
@@ -31,30 +34,31 @@ export default function Register(){
 
     return(
         <RegisterHTML>
-            <StoreName>WPStore</StoreName>
+            <Logo src={logo} />
             <RegisterFORM onSubmit={register}>
                 <input  type='name' required
-                        placeholder={'  Nome'}
+                        placeholder={'NOME'}
                         value={registerINFO.name}
                         onChange={ (e) => setRegisterINFO({...registerINFO, name: e.target.value}) }/>
-               <input  type='email' required
-                        placeholder={'  Email'}
+                <input  type='email' required
+                        placeholder={'EMAIL'}
                         value={registerINFO.email}
                         onChange={ (e) => setRegisterINFO({...registerINFO, email: e.target.value}) }/>
-               <input  type='password' required
-                        placeholder={'  Senha'}
+                <input  type='password' required
+                        placeholder={'SENHA'}
                         value={registerINFO.password}
                         onChange={ (e) => setRegisterINFO({...registerINFO, password: e.target.value}) }/>
                 <input  type='password' required
-                        placeholder={'  Confirme a senha'}
+                        placeholder={'CONFIRME A SENHA'}
                         value={registerINFO.confirmPassword}
                         onChange={ (e) => setRegisterINFO({...registerINFO, confirmPassword: e.target.value}) }/>
-                <button type="submit">Registrar</button>     
+                <button type="submit">REGISTRAR</button>     
             </RegisterFORM>
-            <Link to={`/`}> <RegisterSPAN> Já tem uma conta? Entre agora!</RegisterSPAN> </Link>
+            <Link to={`/`} style={{ textDecoration: 'none' }}><RegisterSPAN>Já tem uma conta? Entre agora!</RegisterSPAN></Link>
         </RegisterHTML>
     )
 }
+
 const RegisterHTML = styled.main`
         display: flex;
         flex-direction: column;
@@ -62,53 +66,67 @@ const RegisterHTML = styled.main`
         justify-content: center;
         width: 100vw;
         height: 100vh;
-        background-color: #EFEFEF;
+        background-color: #F0F4F7;
     `
-const StoreName = styled.h1`
-    font-family: 'Alfa Slab One', cursive;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 30px;
-    letter-spacing: 0em;
-    color: #205375;
-`
+const Logo = styled.img`
+        width: 210px;
+        height: 126px;
+    `
 const RegisterFORM = styled.form`
+    width: 265px;
+    height: 241px;
     display: flex;
     flex-direction: column;
-    margin: 20px 0 40px 0;
-    padding: 40px 20px 40px 20px;
-    border-radius: 10px;
-    background-color: #F66B0E;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 12px;
     input{
-        height: 58px;
-        width: 326px;
-        left: 25px;
-        top: 233px;
-        border-radius: 5px;
+        height: 41px;
+        width: 265px;
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
         border: none;
-        margin-bottom: 15px;
+        padding-left: 15px;
+        font-family: 'Roboto';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 10px;
+        color: #1a1a1a;
+
+        ::placeholder {
+            font-family: 'Roboto';
+            font-size: 10px;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 10px;
+            color: #1a1a1a;
+        }
     }
     button{
-        height: 46px;
-        width: 326px;
-        left: 23px;
-        top: 375px;
-        border-radius: 5px;
-        background-color: #205375;
-        font-family: 'Alfa Slab One', cursive;
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 23px;
-        letter-spacing: 0em;
-        color: #fff;
+        height: 41px;
+        width: 265px;
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: none;
+        background-color: #000000;
+        font-family: 'Roboto';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 10px;
+        color: #FFFFFF;
     }
 `
 const RegisterSPAN = styled.span`
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 30px;
-    letter-spacing: 0em;
-    color: #112B3C;
-    text-decoration: none;
+        font-family: 'Roboto';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 10px;
+        color: #1a1a1a;
 `
