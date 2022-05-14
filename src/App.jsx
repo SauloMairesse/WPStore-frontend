@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import usuarioINFO from './context/userINFO'
+import Item from './pages/Item'
 
 export default function App(){
 
@@ -16,7 +17,7 @@ export default function App(){
                     <Route path='/' element={<Login/>}/>
                     <Route path='/register' element={<Register/>}/>
                     <Route path='/home' element={<Home/>}/>
-                    {/* <Route path='/cart' element={<Cart/>}/> */}
+                    <Route path='/item' element={<Item/>}/>
                 </Routes>
             </BrowserRouter>
         </usuarioINFO.Provider>
