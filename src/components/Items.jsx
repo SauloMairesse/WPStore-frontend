@@ -68,7 +68,7 @@ const NameITEM = styled.h2`
         font-weight: 400;
         line-height: 30px;
         letter-spacing: 0em;
-        margin-bottom: 10px;
+        /* margin-bottom: 10px; */
     `
 const ValueITEM = styled.h3`
         font-family: 'Inconsolata', monospace;
@@ -76,16 +76,16 @@ const ValueITEM = styled.h3`
         font-weight: 400;
         line-height: 30px;
         letter-spacing: 0em;
-        color: #F66B0E;
+        color: #5DADFB;
         margin-bottom: 10px;
     `
 const Buy = styled.h4`
         font-family: 'Inconsolata', monospace;
         font-size: 20px;
-        font-weight: 400;
+        font-weight: 700;
         line-height: 30px;
         letter-spacing: 0em;
-        color: #205375;
+        color: black;
         margin-bottom: 10px;
         `
 const ItemsVAZIO = styled.main`
