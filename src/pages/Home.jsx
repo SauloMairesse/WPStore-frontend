@@ -6,10 +6,13 @@ import axios from "axios"
 import Items from "../components/Items"
 
 export default function Home() {
+    const navigate = useNavigate()
 
     const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
-
-    const navigate = useNavigate()
+    if(!userINFO.token ){
+        alert('Usuario não logado')
+        navigate('/')
+    }
 
     return (
         <HomeHTML>

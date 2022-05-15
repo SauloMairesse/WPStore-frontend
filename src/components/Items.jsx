@@ -12,7 +12,7 @@ export default function Items(){
     console.log('Entrei na lista de itens')
 
     React.useEffect( () => {
-        const config = {headers: { User: userINFO.name}}
+        const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
         const URL = 'http://localhost:5000/products'
         const promise = axios.get(URL, config)
         promise.then( (response) => { setListItems(...listItems, response.data) } )

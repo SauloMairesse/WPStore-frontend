@@ -7,7 +7,7 @@ export default function Item(){
     const navigate = useNavigate()
 
     // React.useEffect( () => {
-    //     const config = {headers: { User: userINFO.name}}
+    //     const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
     //     const URL = 'https://project-wpstore.herokuapp.com/products'
     //     const promise = axios.get(URL, config)
     //     promise.then( (response) => { setListItems(...listItems, response.data) } )
