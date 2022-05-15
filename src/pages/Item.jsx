@@ -1,17 +1,37 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
+import usuarioINFO from '../context/userINFO'
+
 
 export default function Item(){
-
     const navigate = useNavigate()
+    const _id = useParams()
+    console.log('id pos useparams',_id)
 
-    // React.useEffect( () => {
-    //     const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
-    //     const URL = 'https://project-wpstore.herokuapp.com/products'
-    //     const promise = axios.get(URL, config)
-    //     promise.then( (response) => { setListItems(...listItems, response.data) } )
-    //     promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   }   ,[])
+    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
+    if(!userINFO.token ){
+        navigate('/')
+    }
+
+    React.useEffect( () => {
+        const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
+        const URL = `http://localhost:5000/products/${_id}`
+        const promise = axios.get(URL, config)
+        console.log('oque que vem pela frente ? then ou catch')
+        console.log('CONSOLE DO _id é: ', _id)
+        promise.then( (response) => { console.log('response: ',response.data) } )
+        promise.catch( (err) => console.log('Deu Erro get productDetail: ',err))   }   ,[])
+
+    // function addToCart(){
+    //         const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
+    //         const body = {_id: itemId}
+    //         const URL = 'http://localhost:5000/addCart'
+    //         const promise = axios.get(URL, config, body)
+    //         promise.then( (response) => { console.log(response.data) } )
+    //         promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   
+    //     }
 
     return (
         <ItemHTML>
@@ -19,7 +39,7 @@ export default function Item(){
                 <ion-icon   onClick={ () => navigate('/home') }
                             name="arrow-back-outline"></ion-icon>
                 <h2>DETAIL PRODUCT</h2>
-                <ion-icon name="bag-add-outline"></ion-icon>
+                <ion-icon  name="bag-add-outline"></ion-icon>
             </ItemHEADER>
             <Details>
                 <IMG src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/
@@ -28,7 +48,7 @@ export default function Item(){
                     ERAEREAREQBERAEREAREQBERAP//Z" alt="" />
                 <div>
                     <NAME> SKATE </NAME>
-                    <DESCRIPTION> Isso é um skate bolado demais</DESCRIPTION>
+                    <DESCRIPTION>ISSO É UM SKATE</DESCRIPTION>
                     <PRICE>R$26.00</PRICE>
                 </div>
             </Details>

@@ -1,31 +1,39 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components'
 import usuarioINFO from "../context/userINFO"
 import axios from 'axios'
+import itemDETAIL from "../context/itemINFO"
 
 export default function Items(){
 
     const {userINFO} = React.useContext(usuarioINFO)
+    const { itemINFO, setItemINFO } = React.useContext(itemDETAIL)
+
     const [listItems, setListItems] = React.useState([])
+    
     const navigate = useNavigate()
-    console.log('Entrei na lista de itens')
 
     React.useEffect( () => {
         const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
         const URL = 'http://localhost:5000/products'
         const promise = axios.get(URL, config)
-        promise.then( (response) => { setListItems(...listItems, response.data) } )
-        promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   }   ,[])
+        promise.then( (response) => {console.log(response.data) 
+                                    setListItems(...listItems, response.data) } )
+        promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   } 
+    ,[])
 
     function Item(props){
+        console.log(`${props._id}`)
         return(
-            <ItemHTML onClick={() => navigate('/item')}>
-                <ItemIMG src= {props.img} alt="" />
-                <NameITEM>{props.name}</NameITEM>
-                <ValueITEM> {props.price}</ValueITEM>
-                <Buy>BUY NOW</Buy>
-            </ItemHTML>)
+            <Link to={`/item/${props._id}`}>
+                <ItemHTML>
+                    <ItemIMG src= {props.img} alt="" />
+                    <NameITEM>{props.name}</NameITEM>
+                    <ValueITEM> {props.price}</ValueITEM>
+                    <Buy>BUY NOW</Buy>
+                </ItemHTML>
+            </Link>)
     }
 
     if(listItems.length === 0){
@@ -37,9 +45,10 @@ export default function Items(){
     }else{
         return(
             <ItemsHTML>
-                {listItems.map( (item) => <Item img={item.img}
+                {listItems.map( (item) => <Item _id={item._id}
+                                                img={item.img}
                                                 name={item.name}
-                                                price={item.price}/> )}
+                                                price={item.price}/>)}
             </ItemsHTML>
         )
     }
