@@ -9,7 +9,7 @@ import logo from "../assets/Logo.png"
 export default function Login(){
 
     const {userINFO, setUserINFO} = React.useContext(usuarioINFO)
-
+    
     const [loginINFO, setLoginINFO] = React.useState({  email: '',
                                                         password: ''})
     const navigate = useNavigate()

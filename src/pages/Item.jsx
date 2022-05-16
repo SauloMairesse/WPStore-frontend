@@ -33,7 +33,7 @@ export default function Item(){
         console.log('name: ',name)
             const URL = 'http://localhost:5000/carts'
             const promise = axios.post(URL, body, config)
-            promise.then( (response) => { console.log(response.data) } )
+            promise.then( (response) => { alert('Adicionado') } )
             promise.catch( (err) => console.log('erro addToCart: ',err))   
         }
 
@@ -47,8 +47,9 @@ export default function Item(){
                 <ion-icon   onClick={ () => navigate('/home') }
                             name="arrow-back-outline"></ion-icon>
                 <h2>DETAIL PRODUCT</h2>
-                <ion-icon   onClick={() =>  addToCart(name)}
-                            name="bag-add-outline"></ion-icon>
+                <ion-icon   name="bag-outline"
+                            size='large'
+                            onClick={() => navigate('/cart')} />
             </ItemHEADER>
             <Details>
                 <IMG src= {img} alt="" />
@@ -61,6 +62,11 @@ export default function Item(){
             <BUYBUTTON>
                 <ion-icon   name="bag-outline" />
                 <ToBuy>BUY NOW</ToBuy>
+            </BUYBUTTON>
+            <BUYBUTTON>
+                <ion-icon   onClick={ () => addToCart(name) }
+                            name="bag-outline" />
+                <ToBuy>ADD TO CART</ToBuy>
             </BUYBUTTON>
         </ItemHTML>
         }
