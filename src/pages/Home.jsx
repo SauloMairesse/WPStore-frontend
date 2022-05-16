@@ -37,7 +37,7 @@ export default function Home() {
                     </Link>
                     <Link to="/cart" style={{ textDecoration: 'none' }}>
                         <div>
-                            <ion-icon name="cart-outline" ></ion-icon>
+                            <ion-icon name="cart-outline"></ion-icon>
                             <h1>CART</h1>
                         </div>
                     </Link>
