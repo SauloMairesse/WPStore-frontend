@@ -16,7 +16,7 @@ export default function Login(){
 
     function login(event){
         event.preventDefault();
-        const URL = 'http://localhost:5000'
+        const URL = 'http://localhost:5000/'
         const promise = axios.post(URL, {...loginINFO})
         promise.then( (res) => {setUserINFO(res.data)
                                 console.log('token login:', userINFO.token) 

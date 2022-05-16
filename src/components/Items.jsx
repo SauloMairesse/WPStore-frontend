@@ -7,6 +7,7 @@ import axios from 'axios'
 export default function Items(){
 
     const {userINFO} = React.useContext(usuarioINFO)
+
     console.log('tokem items: ',userINFO.token)
     const [listItems, setListItems] = React.useState([])
     
