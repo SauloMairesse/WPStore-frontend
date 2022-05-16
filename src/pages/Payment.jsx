@@ -19,10 +19,8 @@ export default function PaymentRegister(props){
         credValidity
     }
     const { token, userId } = userINFO
-    console.log(userINFO)
 
     useEffect(()=>{
-        console.log(userINFO)
         if(!token){
             Navigate("/")
         }
