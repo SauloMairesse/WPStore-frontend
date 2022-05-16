@@ -12,7 +12,6 @@ import PaymentRegister from './pages/PaymentRegister'
 export default function App(){
 
     const [userINFO, setUserINFO] = React.useState({}) //use Context || info global usuario
-
     return(
         <usuarioINFO.Provider value={{userINFO, setUserINFO}}>
             <BrowserRouter>
@@ -20,7 +19,7 @@ export default function App(){
                     <Route path='/' element={<Login/>}/>
                     <Route path='/register' element={<Register/>}/>
                     <Route path='/home' element={<Home/>}/>
-                    <Route path='/item' element={<Item/>}/>
+                    <Route path='/item/:_id' element={<Item/>}/>
                     <Route path='/cart' element={<Cart/>}/>
                     <Route path='/payment' element={<PaymentRegister />} />
                 </Routes>

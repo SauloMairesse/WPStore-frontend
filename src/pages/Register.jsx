@@ -16,7 +16,6 @@ export default function Register(){
                                                             password: '',
                                                             confirmPassword: ''})                                              
                                                             
-    console.log(registerINFO)
     function register(event){
         event.preventDefault()
         if(registerINFO.password !== registerINFO.confirmPassword){

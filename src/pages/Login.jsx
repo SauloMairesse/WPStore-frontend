@@ -22,7 +22,6 @@ export default function Login(){
                                 navigate('/payment')})
         promise.catch( () => {alert('Usuario inexistente ou Senha errada')} )
     }
-
     return (
         <LoginHTML>
             <Logo src={logo} />
