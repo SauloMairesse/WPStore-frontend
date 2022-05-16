@@ -25,14 +25,16 @@ export default function Item(){
         promise.catch( (err) => console.log('Deu Erro get productDetail: ',err))   }   ,[])
     
     const { name, color, price, img, description} = item 
-
+    console.log('userINFO: ', userINFO)
+    
     function addToCart(name){
-            const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
-            const body = {name}
+        const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
+        const body = {name}
+        console.log('name: ',name)
             const URL = 'http://localhost:5000/carts'
             const promise = axios.post(URL, body, config)
             promise.then( (response) => { console.log(response.data) } )
-            promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   
+            promise.catch( (err) => console.log('erro addToCart: ',err))   
         }
 
     return (
