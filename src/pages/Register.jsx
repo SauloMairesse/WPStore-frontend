@@ -16,7 +16,6 @@ export default function Register(){
                                                             password: '',
                                                             confirmPassword: ''})                                              
                                                             
-    console.log(registerINFO)
     function register(event){
         event.preventDefault()
         if(registerINFO.password !== registerINFO.confirmPassword){
@@ -24,7 +23,7 @@ export default function Register(){
             setRegisterINFO({...registerINFO, password:'', confirmPassword: ''})
             return
         }
-        const URL = 'https://project-wpstore.herokuapp.com/signup'
+        const URL = 'http://localhost:5000/signup'
         const promise = axios.post(URL, {...registerINFO})
         promise.then( (res) => {console.log(res.datamac)
                                 navigate('/')} )
