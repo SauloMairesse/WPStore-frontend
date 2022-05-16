@@ -5,13 +5,13 @@ import styled from "styled-components";
 import usuarioINFO from "../context/userINFO";
 
 
-export default function PaymentRegister(){
+export default function PaymentRegister(props){
     const Navigate = useNavigate()
     const [credName, setCredName] = useState("")
     const [credCard, setCredCard] = useState("")
     const [credCode, setCredCode] = useState("")
     const [credValidity, setCredValidity] = useState("")
-    const { userINFO } = useContext(usuarioINFO)
+    const { userINFO, balance } = useContext(usuarioINFO)
     const credData = {
         credName,
         credCard,
@@ -19,6 +19,7 @@ export default function PaymentRegister(){
         credValidity
     }
     const { token, userId } = userINFO
+    console.log(userINFO)
 
     useEffect(()=>{
         console.log(userINFO)
@@ -30,7 +31,8 @@ export default function PaymentRegister(){
 
     function sendCredData(e){
         e.preventDefault();
-        const config = {headers: { userID: userId}}
+        console.log('entrei aqui dentro')
+        const config = {headers: { userId: userId}}
         const URL = 'https://project-wpstore.herokuapp.com/payment'
 
         axios.post(URL,
@@ -41,7 +43,7 @@ export default function PaymentRegister(){
                 console.log(data)
                 Navigate("/home")
             })
-            .catch(Error)
+            .catch((err) => console.log('deu erro aqui', err))
     }
     
     return(
@@ -49,41 +51,51 @@ export default function PaymentRegister(){
             <ItemHEADER>
                 <ion-icon   onClick={ () => Navigate('/home') }
                             name="arrow-back-outline"></ion-icon>
-                <h2>Forma de pagamento</h2>
-                <ion-icon name="bag-add-outline"></ion-icon>
+                <h2>Fazer Pagamento</h2>
+                <ion-icon name="bag-outline"
+                    onClick={() => Navigate('/cart')} />
             </ItemHEADER>
             <Body onSubmit={sendCredData}>
                 <label for="credName">Nome completo do cartão</label>
-                <Input type={"text"} id="credName" placeholder="Nome Completo" onChange={(e)=>{
+                <Input type={"text"} id="credName" placeholder="Nome Completo" required onChange={(e)=>{
                     setCredName(e)
                 }} />
                 <label for="credNumber">Número do cartão</label>
-                <Input type={"text"} id="credNumber" placeholder="Número do cartão" onChange={(e)=>{
+                <Input type="number" id="credNumber" placeholder="Número do cartão" required onChange={(e)=>{
                     setCredCard(e)
                 }} />
                 <Sections>
                     <section>
                         <label for="credCode">CVV</label>
-                        <MiniInput type={"text"} id="credCode" placeholder="CVV" onChange={(e)=>{
+                        <MiniInput type={"text"} id="credCode" placeholder="CVV" required onChange={(e)=>{
                             setCredCode(e)
                         }} />
                     </section>
                     <section>
                         <label for="credDate">Data de validade</label>
-                        <MiniInput type={"text"} id="credDate" placeholder="Ex:12/25" onChange={(e)=>{
+                        <MiniInput type={"text"} id="credDate" placeholder="Ex:12/25" required onChange={(e)=>{
                             setCredValidity(e)
                         }} />
                     </section>
                 </Sections>
-            </Body>
-            <footer>
+                <BuyINFO>Nome do Comprador: {userINFO.name}</BuyINFO>
+                <BuyINFO>Valor Total: R$ {balance.toFixed(2)}</BuyINFO>
                 <Buttonn type="submit">Confirmar</Buttonn>
-            </footer>
+            </Body>
+                <footer>
+                </footer>
         </Page>
     )
-
 }
-
+const BuyINFO = styled.h1`
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 20px;
+    margin: 10px 0 10px 0;
+    `
 const Page = styled.main`
     display: flex;
     flex-direction: column;
@@ -97,9 +109,17 @@ const Page = styled.main`
         align-items: center;
         justify-content: center;
     }
-`
+    input{
+        input[type='number'] {
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+    }
+    `
 const Input = styled.input`
-    
+    -moz-appearance:textfield;
     width: 95%;
     background-color: black;
     margin-top: 5px;
@@ -108,7 +128,6 @@ const Input = styled.input`
     color: #FFFFFF;
     padding-left: 10px;
     border: none;
-
 `
 const ItemHEADER = styled.header`
     display: flex;
@@ -119,6 +138,7 @@ const ItemHEADER = styled.header`
     padding: 10px 20px 0 20px;
     width: 400px;
     height: 100px;
+    font-size: 25px;
     background-color: #F0F4F7;
         h2{
             /* font-weight: bold; */
@@ -134,6 +154,15 @@ const MiniInput = styled.input`
     color: #FFFFFF;
     padding-left: 10px;
     border: none;
+    input{
+            input[type='number'] {
+        -moz-appearance:textfield;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+    };
 `
 const Sections = styled.div`
     display: flex;
@@ -168,5 +197,4 @@ const Buttonn = styled.button`
     border: none;
     width: 100px;
     height: 40px;
-
 `

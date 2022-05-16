@@ -17,7 +17,7 @@ export default function Item(){
 
     React.useEffect( () => {
         const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
-        const URL = `http://localhost:5000/products/${_id}`
+        const URL = `https://project-wpstore.herokuapp.com/products/${_id}`
         const promise = axios.get(URL, config)
         promise.then( (response) => { 
             setItem(response.data) 
@@ -63,9 +63,8 @@ export default function Item(){
                 <ion-icon   name="bag-outline" />
                 <ToBuy>BUY NOW</ToBuy>
             </BUYBUTTON>
-            <BUYBUTTON>
-                <ion-icon   onClick={ () => addToCart(name) }
-                            name="bag-outline" />
+            <BUYBUTTON  onClick={ () => addToCart(name)} >
+                <ion-icon name="bag-outline" />
                 <ToBuy>ADD TO CART</ToBuy>
             </BUYBUTTON>
         </ItemHTML>

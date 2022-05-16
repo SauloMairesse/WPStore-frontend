@@ -8,9 +8,8 @@ import usuarioINFO from "../context/userINFO"
 
 export default function Cart() {
     const navigate = useNavigate()
-    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
+    const { userINFO, setUserINFO, setBalance} = React.useContext(usuarioINFO)
     const [cartList, setCartList] = useState([]);
-
     const config = { headers: { "Authorization": `Bearer ${userINFO.token}` } }
     const URL = 'https://project-wpstore.herokuapp.com/carts'
 
@@ -27,8 +26,9 @@ export default function Cart() {
             price = parseFloat(price);
             quantity = parseFloat(quantity);
             balance += quantity * price;
+            setBalance(balance)
         });
-    }
+    } 
 
     return (
         <HomeHTML>
@@ -37,13 +37,7 @@ export default function Cart() {
                     <CartHEADER>
                         <header>
                             <h1>YOUR CART</h1>
-                            <div>
-                                <h1>TOTAL</h1>
-                                <div>
-                                    <h2>$</h2>
-                                    <h1>{balance}</h1>
-                                </div>
-                            </div>
+                            <h2>TOTAL : R$ {balance.toFixed(2)}</h2>
                         </header>
                     </CartHEADER>
                     <CartItems>
@@ -113,7 +107,7 @@ export default function Cart() {
                         })}
                     </CartItems>
                     <CheckoutButton>
-                        <Link to="/checkout" style={{ textDecoration: 'none' }}>
+                        <Link to="/payment" style={{ textDecoration: 'none' }}>
                             <div>
                                 <button onClick={() => {
                                     localStorage.setItem("cartList", JSON.stringify(cartList))
@@ -205,7 +199,7 @@ const CartHEADER = styled.div`
             justify-content: space-between;
 
             div {
-                width: 40px;
+                width: 60px;
                 display: flex;
                 justify-content: flex-end;
 
