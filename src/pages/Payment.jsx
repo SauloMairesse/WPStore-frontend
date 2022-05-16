@@ -29,8 +29,8 @@ export default function PaymentRegister(props){
 
     function sendCredData(e){
         e.preventDefault();
-        console.log('entrei aqui dentro')
-        const config = {headers: { userId: userId}}
+        console.log('entrei aqui dentro', credData)
+        const config = {headers: { userId: userINFO._id}}
         const URL = 'https://project-wpstore.herokuapp.com/payment'
 
         axios.post(URL,
@@ -41,7 +41,7 @@ export default function PaymentRegister(props){
                 console.log(data)
                 Navigate("/home")
             })
-            .catch((err) => console.log('deu erro aqui', err))
+            .catch((err) => console.log('deu erro sendCredData', err))
     }
     
     return(
@@ -56,23 +56,23 @@ export default function PaymentRegister(props){
             <Body onSubmit={sendCredData}>
                 <label for="credName">Nome completo do cartão</label>
                 <Input type={"text"} id="credName" placeholder="Nome Completo" required onChange={(e)=>{
-                    setCredName(e)
+                    setCredName(e.target.value)
                 }} />
                 <label for="credNumber">Número do cartão</label>
                 <Input type="number" id="credNumber" placeholder="Número do cartão" required onChange={(e)=>{
-                    setCredCard(e)
+                    setCredCard(e.target.value)
                 }} />
                 <Sections>
                     <section>
                         <label for="credCode">CVV</label>
                         <MiniInput type={"text"} id="credCode" placeholder="CVV" required onChange={(e)=>{
-                            setCredCode(e)
+                            setCredCode(e.target.value)
                         }} />
                     </section>
                     <section>
                         <label for="credDate">Data de validade</label>
                         <MiniInput type={"text"} id="credDate" placeholder="Ex:12/25" required onChange={(e)=>{
-                            setCredValidity(e)
+                            setCredValidity(e.target.value)
                         }} />
                     </section>
                 </Sections>
@@ -80,8 +80,6 @@ export default function PaymentRegister(props){
                 <BuyINFO>Valor Total: R$ {balance.toFixed(2)}</BuyINFO>
                 <Buttonn type="submit">Confirmar</Buttonn>
             </Body>
-                <footer>
-                </footer>
         </Page>
     )
 }
