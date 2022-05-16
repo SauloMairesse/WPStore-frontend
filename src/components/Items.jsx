@@ -7,8 +7,8 @@ import axios from 'axios'
 export default function Items(){
 
     const {userINFO} = React.useContext(usuarioINFO)
-    console.log("token item: ", usuarioINFO.token)
 
+    console.log('tokem items: ',userINFO.token)
     const [listItems, setListItems] = React.useState([])
     
     const navigate = useNavigate()

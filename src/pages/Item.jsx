@@ -21,7 +21,6 @@ export default function Item(){
         const promise = axios.get(URL, config)
         promise.then( (response) => { 
             setItem(response.data) 
-            
         } )
         promise.catch( (err) => console.log('Deu Erro get productDetail: ',err))   }   ,[])
     
@@ -30,7 +29,7 @@ export default function Item(){
     function addToCart(name){
             const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
             const body = {name}
-            const URL = 'http://localhost:5000/addToCart'
+            const URL = 'http://localhost:5000/carts'
             const promise = axios.post(URL, body, config)
             promise.then( (response) => { console.log(response.data) } )
             promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   
@@ -46,7 +45,7 @@ export default function Item(){
                 <ion-icon   onClick={ () => navigate('/home') }
                             name="arrow-back-outline"></ion-icon>
                 <h2>DETAIL PRODUCT</h2>
-                <ion-icon   onClick={() =>  addToCart({name})}
+                <ion-icon   onClick={() =>  addToCart(name)}
                             name="bag-add-outline"></ion-icon>
             </ItemHEADER>
             <Details>
