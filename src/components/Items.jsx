@@ -3,13 +3,11 @@ import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components'
 import usuarioINFO from "../context/userINFO"
 import axios from 'axios'
-import itemDETAIL from "../context/itemINFO"
 
 export default function Items(){
 
     const {userINFO} = React.useContext(usuarioINFO)
-    const { itemINFO, setItemINFO } = React.useContext(itemDETAIL)
-
+    console.log('tokem items: ',userINFO.token)
     const [listItems, setListItems] = React.useState([])
     
     const navigate = useNavigate()

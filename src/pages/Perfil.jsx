@@ -5,23 +5,29 @@ import usuarioINFO from "../context/userINFO"
 import axios from "axios"
 import Items from "../components/Items"
 
-export default function Home() {
-
+export default function Profile() {
     const navigate = useNavigate()
-
+    
     const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
 
-    console.log('token Home: ', userINFO.token)
+    React.useEffect( () => {
+        const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
+        const URL = `http://localhost:5000/`
+        const promise = axios.get(URL, config)
+        promise.then( (response) => { console.log(response.data)} )
+        promise.catch( (err) => console.log('Deu Erro get productDetail: ',err))   }   ,[])
+
+    const {name} = userINFO
     return (
         <HomeHTML>
             <HomeHEADER>
-                <UserPHOTO>SD</UserPHOTO>
-                <h2>All PRODUCTS</h2>
+                <UserPHOTO>WP</UserPHOTO>
+                <h2>{name}</h2>
                 <ion-icon name="bag-outline"
                     size='large'
                     onClick={() => navigate('/cart')} />
             </HomeHEADER>
-            <Items />
+
             <CartFOOTER>
                 <footer>
                     <Link to="/home" style={{ textDecoration: 'none' }}>

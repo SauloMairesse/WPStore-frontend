@@ -21,7 +21,6 @@ export default function Item(){
         const promise = axios.get(URL, config)
         promise.then( (response) => { 
             setItem(response.data) 
-            
         } )
         promise.catch( (err) => console.log('Deu Erro get productDetail: ',err))   }   ,[])
     
