@@ -16,10 +16,12 @@ export default function Login(){
 
     function login(event){
         event.preventDefault();
-        const URL = 'https://project-wpstore.herokuapp.com/'
+        const URL = 'http://localhost:5000/'
         const promise = axios.post(URL, {...loginINFO})
-        promise.then( (res) => {setUserINFO(res.data)
-                                navigate('/home')})
+        promise.then( (res) => {
+            console.log(res.data)
+            localStorage.setItem("token", res.data.token);
+            navigate('/home')})
         promise.catch( () => {alert('Usuario inexistente ou Senha errada')} )
     }
 

@@ -1,33 +1,32 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from 'styled-components'
-//import axios from "axios"
+import axios from "axios"
+import React from "react"
 
-//import usuarioINFO from "../context/userINFO"
+import usuarioINFO from "../context/userINFO"
 
 export default function Cart() {
+    const navigate = useNavigate()
+    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
+    const [cartList, setCartList] = useState([]);
 
-    //const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
-    const [cartList, setCartList] = useState([ // test
-        { name: "Mug", description: "A standard ceramic mug", color: "Red", imgURL: "https://i.pinimg.com/originals/72/a1/08/72a10896a0ba702841cfdc1d6b4b6bf4.png", quantity: "1", price: "25,00" },
-        { name: "Mug", description: "A standard ceramic mug", color: "Red", imgURL: "https://i.pinimg.com/originals/72/a1/08/72a10896a0ba702841cfdc1d6b4b6bf4.png", quantity: "2", price: "25,00" },
-        { name: "Mug", description: "A standard ceramic mug", color: "Red", imgURL: "https://i.pinimg.com/originals/72/a1/08/72a10896a0ba702841cfdc1d6b4b6bf4.png", quantity: "4", price: "25,00" }
-    ]);
+    const config = { headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` } }
+    const URL = 'http://localhost:5000/carts'
 
-    /*React.useEffect(() => {
-        const config = { headers: { User: userINFO.name } }
-        const URL = 'http://localhost:5000/cart'
+    React.useEffect(() => {
         const promise = axios.get(URL, config)
-        promise.then((response) => { setCartList(...cartList, response.data) })
-        promise.catch((err) => console.log('Deu Erro get cartList: ', err))
-    }, []);*/
+        promise.then((response) => { setCartList([...response.data]) })
+        promise.catch((err) => console.log('Error while recovering cart list', err))
+    }, []);
 
     let balance = 0;
     if (cartList.length > 0) {
         cartList.forEach(element => {
-            let { price } = element;
+            let { price, quantity } = element;
             price = parseFloat(price);
-            balance += price;
+            quantity = parseFloat(quantity);
+            balance += quantity * price;
         });
     }
 
@@ -42,48 +41,94 @@ export default function Cart() {
                                 <h1>TOTAL</h1>
                                 <div>
                                     <h2>$</h2>
-                                    <h1>{balance},00</h1>
+                                    <h1>{balance}</h1>
                                 </div>
                             </div>
                         </header>
                     </CartHEADER>
                     <CartItems>
                         {cartList.map(element => {
-                            const { name, description, color, imgURL, quantity, price } = element;
+                            const { name, color, description, price, quantity, img } = element;
                             return (
                                 <CartItem>
-                                    <img src={imgURL} />
-                                    <h3>{color} {name}</h3>
+                                    <img src={img} />
+                                    <h3>{color.toUpperCase()} {name}</h3>
                                     <h4>{description}</h4>
-                                    <h1>QUANTITY: {quantity}</h1>
+                                    <h1>QUANTITY:</h1>
+                                    <ion-icon name="add-outline" onClick={() => {
+                                        const addRequisition = axios.put(URL, { name: name, type: "add" }, config);
+                                        addRequisition.then(() => {
+                                            const array = [...cartList];
+                                            let i = 0;
+                                            array.forEach((product, index) => {
+                                                if (product.name === name) {
+                                                    i = index;
+                                                }
+                                            });
+                                            array[i].quantity++;
+                                            setCartList([...array]);
+                                        });
+                                        addRequisition.catch((err) => console.log('Error while adding item', err));
+                                    }}></ion-icon>
+                                    <h1>{quantity}</h1>
+                                    <ion-icon name="remove-outline" onClick={() => {
+                                        const removeRequisition = axios.put(URL, { name: name, type: "remove" }, config);
+                                        removeRequisition.then(() => {
+                                            const array = [...cartList];
+                                            let i = 0;
+                                            array.forEach((product, index) => {
+                                                if (product.name === name) {
+                                                    i = index;
+                                                }
+                                            });
+                                            array[i].quantity--;
+                                            setCartList([...array]);
+                                        });
+                                        removeRequisition.catch((err) => console.log('Error while removing item', err));
+                                    }}></ion-icon>
                                     <div>
                                         <h2>$</h2>
                                         <h1>{price}</h1>
                                     </div>
-                                    <ion-icon name="close-sharp"></ion-icon>
+                                    <ion-icon name="close-sharp" onClick={() => {
+                                        const deleteRequisition = axios.delete(`${URL}/${name}`, config);
+                                        deleteRequisition.then(() => {
+                                            const array = [...cartList];
+                                            let i = 0;
+                                            array.forEach((product, index) => {
+                                                if (product.name === name) {
+                                                    i = index;
+                                                }
+                                            });
+                                            array.splice(i, 1);
+                                            setCartList([...array]);
+                                        });
+                                        deleteRequisition.catch((err) => console.log('Error while deleting item', err.response));
+                                    }}></ion-icon>
                                 </CartItem>
                             );
                         })}
                     </CartItems>
+                    <CheckoutButton>
+                        <Link to="/checkout" style={{ textDecoration: 'none' }}>
+                            <div>
+                                <button onClick={() => {
+                                    localStorage.setItem("cartList", JSON.stringify(cartList))
+                                    navigate('/payment');
+                                }}>
+                                    <h1>CHECKOUT</h1>
+                                    <div></div>
+                                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                                </button>
+                            </div>
+                        </Link>
+                    </CheckoutButton>
                 </>
                 :
                 <>
                     <Text>Your cart is empty.</Text>
                 </>
             }
-
-            <CheckoutButton>
-                <Link to="/checkout">
-                    <div>
-                        <button>
-                            <h1>CHECKOUT</h1>
-                            <div></div>
-                            <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </button>
-                    </div>
-                </Link>
-            </CheckoutButton>
-
             <CartFOOTER>
                 <footer>
                     <Link to="/home" style={{ textDecoration: 'none' }}>
@@ -212,10 +257,17 @@ const CartItem = styled.div`
     h1:nth-child(4) {
         position: absolute;
         top: 27px;
-        right: 78px;
+        right: 80px;
+    }
+    
+    h1:nth-child(6) {
+        position: absolute;
+        top: 27px;
+        right: 65px;
     }
 
     h3 {
+        width: 76px;
         font-size: 10px;
         line-height: 10px;
         position: absolute;
@@ -224,7 +276,7 @@ const CartItem = styled.div`
     }
 
     h4 {
-        width: 70px;
+        width: 80px;
         font-size: 10px;
         line-height: 10px;
         font-weight: normal;
@@ -255,7 +307,23 @@ const CartItem = styled.div`
         }
     }
 
-    ion-icon {
+    ion-icon:nth-child(5) {
+        font-size: 9px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 27px;
+        right: 70px;
+    }
+
+    ion-icon:nth-child(7) {
+        font-size: 9px;
+        color: #1a1a1a;
+        position: absolute;
+        top: 27px;
+        right: 55px;
+    }
+
+    ion-icon:nth-child(9) {
         font-size: 9px;
         color: #1a1a1a;
         position: absolute;
