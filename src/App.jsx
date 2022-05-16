@@ -7,7 +7,7 @@ import Home from './pages/Home'
 import usuarioINFO from './context/userINFO'
 import Item from './pages/Item'
 import Cart from './pages/Cart'
-import Profile from './pages/Perfil'
+import PaymentRegister from './pages/PaymentRegister'
 
 export default function App(){
 
@@ -21,7 +21,7 @@ export default function App(){
                     <Route path='/home' element={<Home/>}/>
                     <Route path='/item/:_id' element={<Item/>}/>
                     <Route path='/cart' element={<Cart/>}/>
-                    <Route path='/profile' element={<Profile/>}/>
+                    <Route path='/payment' element={<PaymentRegister />} />
                 </Routes>
             </BrowserRouter>
         </usuarioINFO.Provider>

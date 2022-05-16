@@ -1,0 +1,172 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import usuarioINFO from "../context/userINFO";
+
+
+export default function PaymentRegister(){
+    const Navigate = useNavigate()
+    const [credName, setCredName] = useState("")
+    const [credCard, setCredCard] = useState("")
+    const [credCode, setCredCode] = useState("")
+    const [credValidity, setCredValidity] = useState("")
+    const { userINFO } = useContext(usuarioINFO)
+    const credData = {
+        credName,
+        credCard,
+        credCode,
+        credValidity
+    }
+    const { token, userId } = userINFO
+
+    useEffect(()=>{
+        console.log(userINFO)
+        if(!token){
+            Navigate("/")
+        }
+    },[token]
+    )
+
+    function sendCredData(e){
+        e.preventDefault();
+        const config = {headers: { userID: userId}}
+        const URL = 'https://project-wpstore.herokuapp.com/payment'
+
+        axios.post(URL,
+            credData, 
+            config)
+            .then((response)=>{
+                const { data } = response
+                console.log(data)
+                Navigate("/home")
+            })
+            .catch(Error)
+    }
+    
+    return(
+        <Page>
+            <ItemHEADER>
+                <ion-icon   onClick={ () => Navigate('/home') }
+                            name="arrow-back-outline"></ion-icon>
+                <h2>Forma de pagamento</h2>
+                <ion-icon name="bag-add-outline"></ion-icon>
+            </ItemHEADER>
+            <Body onSubmit={sendCredData}>
+                <label for="credName">Nome completo do cartão</label>
+                <Input type={"text"} id="credName" placeholder="Nome Completo" onChange={(e)=>{
+                    setCredName(e)
+                }} />
+                <label for="credNumber">Número do cartão</label>
+                <Input type={"text"} id="credNumber" placeholder="Número do cartão" onChange={(e)=>{
+                    setCredCard(e)
+                }} />
+                <Sections>
+                    <section>
+                        <label for="credCode">CVV</label>
+                        <MiniInput type={"text"} id="credCode" placeholder="CVV" onChange={(e)=>{
+                            setCredCode(e)
+                        }} />
+                    </section>
+                    <section>
+                        <label for="credDate">Data de validade</label>
+                        <MiniInput type={"text"} id="credDate" placeholder="Ex:12/25" onChange={(e)=>{
+                            setCredValidity(e)
+                        }} />
+                    </section>
+                </Sections>
+            </Body>
+            <footer>
+                <Buttonn type="submit">Confirmar</Buttonn>
+            </footer>
+        </Page>
+    )
+
+}
+
+const Page = styled.main`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #F0F4F7;
+    footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+`
+const Input = styled.input`
+    
+    width: 95%;
+    background-color: black;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+    color: #FFFFFF;
+    padding-left: 10px;
+    border: none;
+
+`
+const ItemHEADER = styled.header`
+    display: flex;
+    position: fixed;
+    top: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px 0 20px;
+    width: 400px;
+    height: 100px;
+    background-color: #F0F4F7;
+        h2{
+            /* font-weight: bold; */
+            font-size: large;
+     }
+`
+const MiniInput = styled.input`
+    width: 60%;
+    background-color: black;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    height: 30px;
+    color: #FFFFFF;
+    padding-left: 10px;
+    border: none;
+`
+const Sections = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    width: 90%;
+
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-right: 10px;
+        
+    }
+`
+const Body = styled.form`
+    width: 85%;
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+`
+const Buttonn = styled.button`
+    position: fixed;
+    bottom: 10%;
+    background-color: black;
+    color: #FFFFFF;
+    border: none;
+    width: 100px;
+    height: 40px;
+
+`
