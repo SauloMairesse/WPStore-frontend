@@ -19,10 +19,10 @@ export default function Login(){
         const URL = 'http://localhost:5000'
         const promise = axios.post(URL, {...loginINFO})
         promise.then( (res) => {setUserINFO(res.data)
+                                console.log('token login:', userINFO.token) 
                                 navigate('/home')})
         promise.catch( () => {alert('Usuario inexistente ou Senha errada')} )
     }
-
     return (
         <LoginHTML>
             <Logo src={logo} />
