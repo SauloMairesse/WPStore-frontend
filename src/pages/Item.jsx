@@ -19,28 +19,22 @@ export default function Item(){
         const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
         const URL = `http://localhost:5000/products/${_id}`
         const promise = axios.get(URL, config)
-        console.log('oque que vem pela frente ? then ou catch')
         promise.then( (response) => { 
             setItem(response.data) 
             
         } )
         promise.catch( (err) => console.log('Deu Erro get productDetail: ',err))   }   ,[])
     
-    const { name, color, price, img } = item 
-    
+    const { name, color, price, img, description} = item 
 
-        
-
-    // function addToCart(){
-    //         const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
-    //         const body = {_id: itemId}
-    //         const URL = 'http://localhost:5000/addCart'
-    //         const promise = axios.get(URL, config, body)
-    //         promise.then( (response) => { console.log(response.data) } )
-    //         promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   
-    //     }
-
-    // const prices = parseFloat[price].toFixed(2)
+    function addToCart(name){
+            const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
+            const body = {name}
+            const URL = 'http://localhost:5000/addToCart'
+            const promise = axios.post(URL, body, config)
+            promise.then( (response) => { console.log(response.data) } )
+            promise.catch( (err) => console.log('Deu Erro get AllItem: ',err))   
+        }
 
     return (
         <>
@@ -52,13 +46,14 @@ export default function Item(){
                 <ion-icon   onClick={ () => navigate('/home') }
                             name="arrow-back-outline"></ion-icon>
                 <h2>DETAIL PRODUCT</h2>
-                <ion-icon  name="bag-add-outline"></ion-icon>
+                <ion-icon   onClick={() =>  addToCart({name})}
+                            name="bag-add-outline"></ion-icon>
             </ItemHEADER>
             <Details>
                 <IMG src= {img} alt="" />
                 <div>
                     <NAME> {name} </NAME>
-                    <DESCRIPTION>ISSO É UM SKATE</DESCRIPTION>
+                    <DESCRIPTION>{description}</DESCRIPTION>
                     <PRICE>R${price.toFixed(2)}</PRICE>
                 </div>
             </Details>
