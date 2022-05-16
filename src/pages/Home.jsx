@@ -7,9 +7,12 @@ import Items from "../components/Items"
 
 export default function Home() {
 
-    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
-
     const navigate = useNavigate()
+
+    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
+    if(!userINFO.token ){
+        navigate('/')
+    }
 
     return (
         <HomeHTML>
