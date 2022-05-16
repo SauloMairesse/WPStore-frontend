@@ -11,7 +11,7 @@ export default function Cart() {
     const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
     const [cartList, setCartList] = useState([]);
 
-    const config = { headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` } }
+    const config = { headers: { "Authorization": `Bearer ${userINFO.token}` } }
     const URL = 'http://localhost:5000/carts'
 
     React.useEffect(() => {

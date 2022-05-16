@@ -7,9 +7,10 @@ import Items from "../components/Items"
 
 export default function Home() {
 
-    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
-
     const navigate = useNavigate()
+
+    const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
+    console.log("resposta2:", userINFO);
 
     return (
         <HomeHTML>
@@ -28,23 +29,24 @@ export default function Home() {
     )
 }
 
-const UserPHOTO = styled.div`
-    display: flex;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Alfa Slab One', cursive;
-    color: #F66B0E;
-    background-color: #205375;
-`
 const HomeHTML = styled.main`
         display: flex;
         justify-content: center;
         width: 100vw;
         height: 100%;
-        background-color: #EFEFEF;
+        background-color: #F0F4F7;
+        ion-icon{
+            font-size: 23px;
+        }
+`
+const UserPHOTO = styled.div`
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Alfa Slab One', cursive;
+    color: #5DADFB;
+    font-size: 20px;
 `
 const HomeHEADER = styled.header`
     display: flex;
@@ -53,9 +55,9 @@ const HomeHEADER = styled.header`
     align-items: center;
     justify-content: space-between;
     padding: 0 20px 0 20px;
-    width: 100%;
+    width: 400px;
     height: 90px;
-    background-color: #EFEFEF;
+    background-color: #F0F4F7;
 `
 const HomeFOOTER = styled.footer`
     display: flex;
