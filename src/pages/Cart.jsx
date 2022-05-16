@@ -12,7 +12,7 @@ export default function Cart() {
     const [cartList, setCartList] = useState([]);
 
     const config = { headers: { "Authorization": `Bearer ${userINFO.token}` } }
-    const URL = 'http://localhost:5000/carts'
+    const URL = 'https://project-wpstore.herokuapp.com/carts'
 
     React.useEffect(() => {
         const promise = axios.get(URL, config)

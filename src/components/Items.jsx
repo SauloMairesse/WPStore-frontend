@@ -14,7 +14,7 @@ export default function Items(){
 
     React.useEffect( () => {
         const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
-        const URL = 'http://localhost:5000/products'
+        const URL = 'https://project-wpstore.herokuapp.com/products'
         const promise = axios.get(URL, config)
         promise.then( (response) => {console.log(response.data) 
                                     setListItems(...listItems, response.data) } )

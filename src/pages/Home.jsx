@@ -10,7 +10,6 @@ export default function Home() {
     const navigate = useNavigate()
 
     const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
-    console.log(userINFO)
 
     return (
         <HomeHTML>

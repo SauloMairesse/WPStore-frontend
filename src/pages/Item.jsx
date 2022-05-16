@@ -31,7 +31,7 @@ export default function Item(){
         const config = {headers: { authorization: `Bearer ${userINFO.token}`}}
         const body = {name}
         console.log('name: ',name)
-            const URL = 'http://localhost:5000/carts'
+            const URL = 'https://project-wpstore.herokuapp.com/carts'
             const promise = axios.post(URL, body, config)
             promise.then( (response) => { alert('Adicionado') } )
             promise.catch( (err) => console.log('erro addToCart: ',err))   

@@ -9,14 +9,14 @@ import logo from "../assets/Logo.png"
 export default function Login(){
 
     const {userINFO, setUserINFO} = React.useContext(usuarioINFO)
-    
+
     const [loginINFO, setLoginINFO] = React.useState({  email: '',
                                                         password: ''})
     const navigate = useNavigate()
 
     function login(event){
         event.preventDefault();
-        const URL = 'http://localhost:5000/'
+        const URL = 'https://project-wpstore.herokuapp.com/'
         const promise = axios.post(URL, {...loginINFO})
         promise.then( (res) => {setUserINFO(res.data)
                                 navigate('/home')})

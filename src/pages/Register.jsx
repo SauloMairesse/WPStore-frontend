@@ -23,7 +23,7 @@ export default function Register(){
             setRegisterINFO({...registerINFO, password:'', confirmPassword: ''})
             return
         }
-        const URL = 'http://localhost:5000/signup'
+        const URL = 'https://project-wpstore.herokuapp.com/signup'
         const promise = axios.post(URL, {...registerINFO})
         promise.then( (res) => {console.log(res.datamac)
                                 navigate('/')} )
