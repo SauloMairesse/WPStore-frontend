@@ -11,7 +11,6 @@ export default function Home() {
 
     const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
 
-    console.log('token Home: ', userINFO.token)
     return (
         <HomeHTML>
             <HomeHEADER>
@@ -26,8 +25,8 @@ export default function Home() {
                 <footer>
                     <Link to="/home" style={{ textDecoration: 'none' }}>
                         <div>
-                            <ion-icon name="home-outline"></ion-icon>
-                            <h1>HOME</h1>
+                            <ion-icon name="home-outline" style={{ color: '#38B6FF' }}></ion-icon>
+                            <h1 style={{ color: '#38B6FF' }}>HOME</h1>
                         </div>
                     </Link>
                     <Link to="/profile" style={{ textDecoration: 'none' }}>
@@ -38,8 +37,8 @@ export default function Home() {
                     </Link>
                     <Link to="/cart" style={{ textDecoration: 'none' }}>
                         <div>
-                            <ion-icon name="cart-outline" style={{ color: '#38B6FF' }}></ion-icon>
-                            <h1 style={{ color: '#38B6FF' }}>CART</h1>
+                            <ion-icon name="cart-outline"></ion-icon>
+                            <h1>CART</h1>
                         </div>
                     </Link>
                 </footer>
