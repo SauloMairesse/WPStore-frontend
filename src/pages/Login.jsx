@@ -19,7 +19,7 @@ export default function Login(){
         const URL = 'https://project-wpstore.herokuapp.com/'
         const promise = axios.post(URL, {...loginINFO})
         promise.then( (res) => {setUserINFO(res.data)
-                                navigate('/home')})
+                                navigate('/payment')})
         promise.catch( () => {alert('Usuario inexistente ou Senha errada')} )
     }
 
