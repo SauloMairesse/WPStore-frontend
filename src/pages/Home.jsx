@@ -11,7 +11,6 @@ export default function Home() {
 
     const { userINFO, setUserINFO } = React.useContext(usuarioINFO)
 
-    console.log('token Home: ', userINFO.token)
     return (
         <HomeHTML>
             <HomeHEADER>

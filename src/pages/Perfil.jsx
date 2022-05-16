@@ -38,14 +38,14 @@ export default function Profile() {
                     </Link>
                     <Link to="/profile" style={{ textDecoration: 'none' }}>
                         <div>
-                            <ion-icon name="person-outline"></ion-icon>
-                            <h1>PROFILE</h1>
+                            <ion-icon name="person-outline" style={{ color: '#38B6FF' }}></ion-icon>
+                            <h1 style={{ color: '#38B6FF' }}>PROFILE</h1>
                         </div>
                     </Link>
                     <Link to="/cart" style={{ textDecoration: 'none' }}>
                         <div>
-                            <ion-icon name="cart-outline" style={{ color: '#38B6FF' }}></ion-icon>
-                            <h1 style={{ color: '#38B6FF' }}>CART</h1>
+                            <ion-icon name="cart-outline"></ion-icon>
+                            <h1>CART</h1>
                         </div>
                     </Link>
                 </footer>

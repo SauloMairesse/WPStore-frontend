@@ -72,6 +72,9 @@ export default function Cart() {
                                     }}></ion-icon>
                                     <h1>{quantity}</h1>
                                     <ion-icon name="remove-outline" onClick={() => {
+                                        if(quantity <= 0) {
+                                            return;
+                                        }
                                         const removeRequisition = axios.put(URL, { name: name, type: "remove" }, config);
                                         removeRequisition.then(() => {
                                             const array = [...cartList];

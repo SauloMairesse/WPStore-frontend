@@ -8,7 +8,6 @@ export default function Items(){
 
     const {userINFO} = React.useContext(usuarioINFO)
 
-    console.log('tokem items: ',userINFO.token)
     const [listItems, setListItems] = React.useState([])
     
     const navigate = useNavigate()
@@ -23,7 +22,6 @@ export default function Items(){
     ,[])
 
     function Item(props){
-        console.log(`${props._id}`)
         return(
             <Link to={`/item/${props._id}`}>
                 <ItemHTML>
